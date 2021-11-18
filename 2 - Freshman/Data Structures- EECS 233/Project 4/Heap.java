@@ -1,0 +1,108 @@
+/**
+ * A class that will function as a heap.
+ * @author Jacob Alspaw
+ */
+public class Heap {
+  
+  /**
+   * The size of the heap.
+   */
+  private int size = 0;
+  
+  /**
+   * A constructor method that will initialize the heap.
+   * @param array The array used to make a heap.
+   */
+  public Heap(int[] array) {
+    size = array.length;
+    heapify(array);
+  }
+  
+  /**
+   * A helper method that will return the heap's size.
+   * @return size The size of the array.
+   */
+  public int getSize() {
+    return size;
+  }
+  
+  /**
+   * A helper method that will set the size of the array.
+   * @param s The designated set size.
+   */
+  public void setSize(int s) {
+    size = s;
+  }
+  
+  /**
+   * A method used to create a heap from an array.
+   * @param array The array used to make the heap.
+   */
+  public void heapify(int[] array) {
+    //should need to produce a total amount of sifts equal to half the array length
+    for(int i = getSize()/2; i >= 0; i--) {
+      //sifting down
+      siftDown(array, i);
+    }
+  }
+  
+  /**
+   * A method that will determine if the heap is out of order, and correct the mistake in the location.
+   * @param array The array that will be sifted.
+   * @param i The location of the parent for the sift down.
+   */
+  public void siftDown(int[] array, int i) {
+    //mthematical formula for left child
+    int leftChild = 2*i + 1;
+    //mathematical formula for right child
+    int rightChild = 2*i + 2;
+    //the parent that could be changed
+    int parent = i;
+    //the parent that wont change
+    int oldParent = i;
+    //if the left chld is in the array and is less than the parent
+    if(leftChild < size && array[leftChild] < array[parent]) {
+      parent = leftChild;
+    }
+    //if the right child is in the array and is less than the "parent" (could be left child or actual parent)
+    if(rightChild < size && array[rightChild] < array[parent]) {
+      parent = rightChild;
+    }
+    //if the heap was out of order
+    if(parent != i) {
+      //make the correction by switching
+      Sorting.swap(array, oldParent, parent);
+      //sift again on the same position to make sure its correct
+      siftDown(array, parent);
+    }
+  }
+  
+  /**
+   * A method that will remove the value on top of the heap. This value 
+   * should be the least value in the heap at all times.
+   * @param array The array used in making the heap.
+   * @return temp The smallest value in the heap, located on top.
+   */
+  public int removeMin(int[] array) {
+    //temp value used as placeholder for lost data
+    int temp = array[0];
+    //moving the lst value in the heap to the top
+    array[0] = array[size];
+    //sifting down to reestablish a heap
+    siftDown(array, 0);
+    return temp;
+  }
+  
+  /**
+   * A helper method that copies values from one array into another.
+   * @param a1 The array recieving values.
+   * @param a2 The array giving values.
+   */
+  public static void replace(int[] a1, int[] a2) {
+    //going through the entire array
+    for(int i = 0; i < a2.length; i++) {
+      //storing the values into a1
+      a1[i] = a2[i];
+    }
+  }
+}

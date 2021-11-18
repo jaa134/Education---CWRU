@@ -1,0 +1,22 @@
+#lang racket
+; squareroot function using Newton's method
+;   new = old - (old * old - value) / (2 * old)
+(define squareroot
+  (lambda (x n)
+    (if (zero? n)
+        x
+        (- (squareroot x (- n 1)) ((/ (- (* squareroot x (- n 1)) (squareroot x (- n 1))) x) (* 2 (squareroot x (- n 1))))))))
+
+(define squareroot2
+  (lambda (x n)
+    (if (zero? n)
+        x
+        (let ((old (squareroot2 x (- n 1))))
+          (- old (/ (- (* old old) x) (* 2 old)))))))
+
+(define squareroot3
+  (lambda (x n)
+    (if (zero? n)
+        x
+        ((lambda (old) (- old (/ (- (* old old) x) (* 2 old))))
+           (squareroot3 x (- n 1))))))

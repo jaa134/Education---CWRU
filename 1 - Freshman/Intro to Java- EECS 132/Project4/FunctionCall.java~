@@ -1,0 +1,34 @@
+public class FunctionCall implements Expression {
+  
+  private Function function;
+  private Expression[] expression;
+  
+  public FunctionCall(Function function, Expression... expression) {
+    this.function = function;
+    this.expression = expression;
+  }
+  
+  public int value(State hashState) {    
+    State newState = new State();
+    for(int i = 0; i < expression.length; i++) {
+      newState.update(function.getVariable()[i].toString(), expression[i].value(hashState));
+    }
+    function.getFunctionBody().execute(newState);
+    return newState.lookup("return");
+  }
+  
+  public String toString() {    
+  StringBuilder newString = new StringBuilder();  
+  newString.append(function.getName() + "(" );  
+  for(int i = 0; i < expression.length; i++) {
+    if(i == expression.length - 1) {
+      newString.append(expression[i].toString());
+    }
+    else{
+      newString.append(expression[i].toString() + "," + " ");
+    }
+  }  
+  newString.append(")");
+  return newString.toString();
+  }
+} 

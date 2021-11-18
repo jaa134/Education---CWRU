@@ -1,0 +1,1 @@
+Word total: 6646, HashTable size: 8192, Average length of collision: 3.776136363636364

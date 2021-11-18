@@ -1,0 +1,10 @@
+#lang racket
+
+
+(define crash (lambda (n) (error 'crash)))
+
+(define factl
+  (lambda (n)
+    (if (zero? n)
+        1
+        (* n (crash (- n 1))))))

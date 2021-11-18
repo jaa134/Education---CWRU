@@ -1,0 +1,212 @@
+Jacob Alspaw
+This file contains information concerning the sorting algorithms implemented in this project.
+
+/=================\
+|    HEAP SORT    |
+\=================/
+-->RANDOMLY SORTED<--
+All arrays were in order for this test run!
+  The length of the used random arrays are 1000.
+  The average time to heap sort was 539007ns for 10 tests.
+  The total time used was 0.00539007 seconds for 10 tests.
+  The varience in this trial set was 268289713382ns, nearly 268.29 seconds squared.
+All arrays were in order for this test run!
+  The length of the used random arrays are 10000.
+  The average time to heap sort was 1421396ns for 10 tests.
+  The total time used was 0.01421396 seconds for 10 tests.
+  The varience in this trial set was 164680563305ns, nearly 164.681 seconds squared.
+All arrays were in order for this test run!
+  The length of the used random arrays are 100000.
+  The average time to heap sort was 10120565ns for 10 tests.
+  The total time used was 0.10120565 seconds for 10 tests.
+  The varience in this trial set was 573883707612ns, nearly 573.884 seconds squared.
+All arrays were in order for this test run!
+  The length of the used random arrays are 1000000.
+  The average time to heap sort was 119999975ns for 10 tests.
+  The total time used was 1.19999975 seconds for 10 tests.
+  The varience in this trial set was 21645926720628ns, nearly 21645.927 seconds squared.
+
+-->PERFECTLY SORTED<--
+All arrays were in order for this test run!
+  The length of the used sorted arrays are 1000.
+  The average time to heap sort was 61582ns for 10 tests.
+  The total time used was 6.1582E-4 seconds for 10 tests.
+  The varience in this trial set was 14083160ns, nearly 0.014 seconds squared.
+All arrays were in order for this test run!
+  The length of the used sorted arrays are 10000.
+  The average time to heap sort was 804631ns for 10 tests.
+  The total time used was 0.00804631 seconds for 10 tests.
+  The varience in this trial set was 810732609ns, nearly 0.811 seconds squared.
+All arrays were in order for this test run!
+  The length of the used sorted arrays are 100000.
+  The average time to heap sort was 9785764ns for 10 tests.
+  The total time used was 0.09785764 seconds for 10 tests.
+  The varience in this trial set was 111347818405ns, nearly 111.348 seconds squared.
+All arrays were in order for this test run!
+  The length of the used sorted arrays are 1000000.
+  The average time to heap sort was 153985039ns for 10 tests.
+  The total time used was 1.53985039 seconds for 10 tests.
+  The varience in this trial set was 27257900380476ns, nearly 27257.9 seconds squared.
+
+-->REVERSE SORTED<--
+All arrays were in order for this test run!
+  The length of the used reversed arrays are 1000.
+  The average time to heap sort was 83217ns for 10 tests.
+  The total time used was 8.3217E-4 seconds for 10 tests.
+  The varience in this trial set was 9514951ns, nearly 0.01 seconds squared.
+All arrays were in order for this test run!
+  The length of the used reversed arrays are 10000.
+  The average time to heap sort was 1068326ns for 10 tests.
+  The total time used was 0.01068326 seconds for 10 tests.
+  The varience in this trial set was 264234547ns, nearly 0.264 seconds squared.
+All arrays were in order for this test run!
+  The length of the used reversed arrays are 100000.
+  The average time to heap sort was 13365448ns for 10 tests.
+  The total time used was 0.13365448 seconds for 10 tests.
+  The varience in this trial set was 4531226137550ns, nearly 4531.226 seconds squared.
+All arrays were in order for this test run!
+  The length of the used reversed arrays are 1000000.
+  The average time to heap sort was 151200830ns for 10 tests.
+  The total time used was 1.5120083 seconds for 10 tests.
+  The varience in this trial set was 1016824790740ns, nearly 1016.825 seconds squared.
+
+
+/==================\
+|    QUICK SORT    |
+\==================/
+-->RANDOMLY SORTED<--
+All arrays were in order for this test run!
+  The length of the used random arrays are 1000.
+  The average time to quick sort was 291324ns for 10 tests.
+  The total time used was 0.00291324 seconds for 10 tests.
+  The varience in this trial set was 433756764846ns, nearly 433.757 seconds squared.
+All arrays were in order for this test run!
+  The length of the used random arrays are 10000.
+  The average time to quick sort was 427502ns for 10 tests.
+  The total time used was 0.00427502 seconds for 10 tests.
+  The varience in this trial set was 28913824218ns, nearly 28.914 seconds squared.
+All arrays were in order for this test run!
+  The length of the used random arrays are 100000.
+  The average time to quick sort was 2544572ns for 10 tests.
+  The total time used was 0.02544572 seconds for 10 tests.
+  The varience in this trial set was 336378624162ns, nearly 336.379 seconds squared.
+All arrays were in order for this test run!
+  The length of the used random arrays are 1000000.
+  The average time to quick sort was 28203654ns for 10 tests.
+  The total time used was 0.28203654 seconds for 10 tests.
+  The varience in this trial set was 7017591567321ns, nearly 7017.592 seconds squared.
+
+-->PERFECTLY SORTED<--
+All arrays were in order for this test run!
+  The length of the used sorted arrays are 1000.
+  The average time to quick sort was 17078ns for 10 tests.
+  The total time used was 1.7078E-4 seconds for 10 tests.
+  The varience in this trial set was 943712ns, nearly 0.001 seconds squared.
+All arrays were in order for this test run!
+  The length of the used sorted arrays are 10000.
+  The average time to quick sort was 187579ns for 10 tests.
+  The total time used was 0.00187579 seconds for 10 tests.
+  The varience in this trial set was 2787867ns, nearly 0.003 seconds squared.
+All arrays were in order for this test run!
+  The length of the used sorted arrays are 100000.
+  The average time to quick sort was 2249019ns for 10 tests.
+  The total time used was 0.02249019 seconds for 10 tests.
+  The varience in this trial set was 24513591433ns, nearly 24.514 seconds squared.
+All arrays were in order for this test run!
+  The length of the used sorted arrays are 1000000.
+  The average time to quick sort was 27274914ns for 10 tests.
+  The total time used was 0.27274914 seconds for 10 tests.
+  The varience in this trial set was 4733609922496ns, nearly 4733.61 seconds squared.
+
+-->REVERSE SORTED<--
+All arrays were in order for this test run!
+  The length of the used reversed arrays are 1000.
+  The average time to quick sort was 17160ns for 10 tests.
+  The total time used was 1.716E-4 seconds for 10 tests.
+  The varience in this trial set was 179726ns, nearly 0.0 seconds squared.
+All arrays were in order for this test run!
+  The length of the used reversed arrays are 10000.
+  The average time to quick sort was 201044ns for 10 tests.
+  The total time used was 0.00201044 seconds for 10 tests.
+  The varience in this trial set was 147089484ns, nearly 0.147 seconds squared.
+All arrays were in order for this test run!
+  The length of the used reversed arrays are 100000.
+  The average time to quick sort was 2290197ns for 10 tests.
+  The total time used was 0.02290197 seconds for 10 tests.
+  The varience in this trial set was 6729971063ns, nearly 6.73 seconds squared.
+All arrays were in order for this test run!
+  The length of the used reversed arrays are 1000000.
+  The average time to quick sort was 27033512ns for 10 tests.
+  The total time used was 0.27033512 seconds for 10 tests.
+  The varience in this trial set was 1960068792322ns, nearly 1960.069 seconds squared.
+
+
+/==================\
+|    MERGE SORT    |
+\==================/
+-->RANDOMLY SORTED<--
+All arrays were in order for this test run!
+  The length of the used random arrays are 1000.
+  The average time to merge sort was 701461ns for 10 tests.
+  The total time used was 0.00701461 seconds for 10 tests.
+  The varience in this trial set was 1794289545029ns, nearly 1794.29 seconds squared.
+All arrays were in order for this test run!
+  The length of the used random arrays are 10000.
+  The average time to merge sort was 1190258ns for 10 tests.
+  The total time used was 0.01190258 seconds for 10 tests.
+  The varience in this trial set was 204569556658ns, nearly 204.57 seconds squared.
+All arrays were in order for this test run!
+  The length of the used random arrays are 100000.
+  The average time to merge sort was 7574022ns for 10 tests.
+  The total time used was 0.07574022 seconds for 10 tests.
+  The varience in this trial set was 1295850429894ns, nearly 1295.85 seconds squared.
+All arrays were in order for this test run!
+  The length of the used random arrays are 1000000.
+  The average time to merge sort was 106446659ns for 10 tests.
+  The total time used was 1.06446659 seconds for 10 tests.
+  The varience in this trial set was 92243552246108ns, nearly 92243.552 seconds squared.
+
+-->PERFECTLY SORTED<--
+All arrays were in order for this test run!
+  The length of the used sorted arrays are 1000.
+  The average time to merge sort was 43887ns for 10 tests.
+  The total time used was 4.3887E-4 seconds for 10 tests.
+  The varience in this trial set was 615802ns, nearly 0.001 seconds squared.
+All arrays were in order for this test run!
+  The length of the used sorted arrays are 10000.
+  The average time to merge sort was 570824ns for 10 tests.
+  The total time used was 0.00570824 seconds for 10 tests.
+  The varience in this trial set was 185369105ns, nearly 0.185 seconds squared.
+All arrays were in order for this test run!
+  The length of the used sorted arrays are 100000.
+  The average time to merge sort was 7393628ns for 10 tests.
+  The total time used was 0.07393628 seconds for 10 tests.
+  The varience in this trial set was 738737837878ns, nearly 738.738 seconds squared.
+All arrays were in order for this test run!
+  The length of the used sorted arrays are 1000000.
+  The average time to merge sort was 95641178ns for 10 tests.
+  The total time used was 0.95641178 seconds for 10 tests.
+  The varience in this trial set was 33115997943614ns, nearly 33115.998 seconds squared.
+
+-->REVERSE SORTED<--
+All arrays were in order for this test run!
+  The length of the used reversed arrays are 1000.
+  The average time to merge sort was 46884ns for 10 tests.
+  The total time used was 4.6884E-4 seconds for 10 tests.
+  The varience in this trial set was 1116350ns, nearly 0.001 seconds squared.
+All arrays were in order for this test run!
+  The length of the used reversed arrays are 10000.
+  The average time to merge sort was 614301ns for 10 tests.
+  The total time used was 0.00614301 seconds for 10 tests.
+  The varience in this trial set was 59779572ns, nearly 0.06 seconds squared.
+All arrays were in order for this test run!
+  The length of the used reversed arrays are 100000.
+  The average time to merge sort was 7123118ns for 10 tests.
+  The total time used was 0.07123118 seconds for 10 tests.
+  The varience in this trial set was 91416171339ns, nearly 91.416 seconds squared.
+All arrays were in order for this test run!
+  The length of the used reversed arrays are 1000000.
+  The average time to merge sort was 94322993ns for 10 tests.
+  The total time used was 0.94322993 seconds for 10 tests.
+  The varience in this trial set was 17468095476529ns, nearly 17468.095 seconds squared.
+

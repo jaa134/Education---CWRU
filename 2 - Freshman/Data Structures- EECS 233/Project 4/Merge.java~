@@ -1,0 +1,31 @@
+public class Merge {
+  
+  /**
+   * This method is a helper for mergeSort. It merges
+   * @param [] int the array from which we are using elements
+   * @param [] int the array to which we are storing elements
+   * @param int the low value in from we start with
+   * @param int the middle of the block we are using to seperate the two arrays we're merging
+   * @param hi the last element in from to put into to
+   */ 
+  private static void merge(int [] from, int [] to, int lo, int mid, int hi)
+  {
+    if (mid > from.length) // if mid is greater than the array, make mid the last value
+      mid = from.length;
+    if (hi > from.length) // if hi is greater than the array, make hi the last value
+      hi = from.length;
+    int i = lo; // index for first half of array to merge
+    int j = mid; // index for second half of array to merge
+    for (int k = lo; k < hi; k++) // loops through desired range of array and swaps elements
+    {
+      if (i == mid)
+        to[k] = from[j++];
+      else if (j == hi)
+        to[k] = from[i++];
+      else if (from[j] < from[i]) 
+        to[k] = from[j++];
+      else
+        to[k] = from[i++];
+    }
+  }
+}

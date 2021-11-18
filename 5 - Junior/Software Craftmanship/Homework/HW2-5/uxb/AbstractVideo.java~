@@ -1,0 +1,16 @@
+package uxb;
+
+public abstract class AbstractVideo<T extends AbstractPeripheral.Builder<T>> extends AbstractPeripheral<AbstractVideo.Builder>
+{
+  public AbstractVideo(Builder<T> builder) { super(builder); }
+  
+  public DeviceClass getDeviceClass()
+  {
+    return DeviceClass.VIDEO;
+  }
+  
+  public static abstract class Builder<T> extends AbstractPeripheral.Builder<Builder>
+  {
+    public Builder(Integer version) { super(version); }
+  }
+}

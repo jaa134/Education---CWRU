@@ -1,0 +1,17 @@
+package uxb;
+
+//a type of peripheral device
+public abstract class AbstractPrinter<T extends AbstractPrinter.Builder<T>> extends AbstractPeripheral<AbstractPrinter.Builder>
+{
+  public AbstractPrinter(Builder<T> builder) { super(builder); }
+  
+  public DeviceClass getDeviceClass()
+  {
+    return DeviceClass.PRINTER;
+  }
+  
+  public static abstract class Builder<T> extends AbstractPeripheral.Builder<Builder>
+  {
+    public Builder(Integer version) { super(version); }
+  }
+}

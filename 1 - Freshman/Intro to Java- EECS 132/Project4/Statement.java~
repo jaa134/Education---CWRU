@@ -1,0 +1,23 @@
+/**
+ * A class that serves as a parent for all statement classes.
+ * @author Jacob Alspaw
+ */ 
+public interface Statement {
+  
+  /**
+   * A method that updates the state with the expression.
+   * @param hashState
+   */
+  public void execute(State hashState);
+  
+  /**
+   * A method that returns a String with all values involved in this class.
+   */
+  public String toString();
+  
+  /**
+   * A method that returns the same string as toSting() except with the indentations.
+   * @param indents
+   */
+  public String toStringTabbed(int indents);
+}

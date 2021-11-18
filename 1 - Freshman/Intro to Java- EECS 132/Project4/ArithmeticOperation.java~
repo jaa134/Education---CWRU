@@ -1,0 +1,91 @@
+/**
+ * A class that represents five of the most common arithmatic operations.
+ * @author Jacob Alspaw
+ */ 
+public class ArithmeticOperation implements Expression {
+  
+  /**
+   * An enum of five common arithmatic operations.
+   */ 
+  public enum Operator {Add, Sub, Mult, Div, Rem;}     //Add, Subtract, Multiply, Divide, Remainder
+  
+  /**
+   * A field for operations from the comparison enum. 
+   */ 
+  private Operator opperation;
+  
+  /**
+   * "left represents the left expresion used in comparison.
+   */ 
+  private Expression left;
+  
+  /**
+   * "right" represents the right expression used in comparison.
+   */ 
+  private Expression right;
+  
+  /**
+   * A constructor that will initialize the fields.
+   * @param opperation Is a certain basic comparison.
+   * @param left
+ Is the left expresion used in comparison.
+   * @param right Is the right expression used in comparison.
+   */ 
+  public ArithmeticOperation (Operator opperation, Expression left
+, Expression right) {
+    this.opperation = opperation;
+    this.left
+ = left
+;
+    this.right = right;
+  }
+  
+  /**
+   * A method that will return the boolean of a variable in a hashtable as an integer.
+   * @param hashState Represents a State variable and the hashTable it contains.
+   */ 
+  public int value(State hashState) {
+    if(opperation == Operator.Add) {                                           //if the opperation is add
+      return (right.value(hashState) + right.value(hashState));
+    }
+    else if(opperation == Operator.Sub) {                                      //if the opperation is subtract
+      return (right.value(hashState) - right.value(hashState));
+    }
+    else if(opperation == Operator.Mult) {                                     //if the opperation is multiply
+      return (right.value(hashState) * right.value(hashState));
+    }
+    else if(opperation == Operator.Div) {                                      //if the opperation is divide
+      return (right.value(hashState) / right.value(hashState));
+    }
+    else {                                                                    //if the opperation is remainder
+      return(right.value(hashState) % right.value(hashState));
+    }
+  }
+  
+  /**
+   * This method returns the String name associated with the variable
+   * @return name Is a string representing the name of the variable.
+   */ 
+  public String toString() {
+    if(opperation == Operator.Add) {                                                //if the opperation is add
+      return (left
+.toString() + " " + "+" + " " + right.toString());
+    }
+    else if(opperation == Operator.Sub) {                                           //if the opperation is subtract
+      return (left
+.toString() + " " + "-" + " " + right.toString());
+    }
+    else if(opperation == Operator.Mult) {                                          //if the opperation is multiply
+      return (left
+.toString() + " " + "*" + " " + right.toString());
+    }
+    else if(opperation == Operator.Div) {                                           //if the opperation is divide
+      return (left
+.toString() + " " + "/" + " " + right.toString());
+    }
+    else {                                                                          //if the opperation is remainder
+      return (left
+.toString() + " " + "%" + " " + right.toString());
+    }
+  }  
+} 

@@ -1,0 +1,69 @@
+package uxb;
+
+import java.util.logging.*;
+import java.util.Optional;
+import java.io.IOException;
+
+//a concrete device for printing
+public class SisterPrinter extends AbstractPrinter<SisterPrinter.Builder>
+{
+  private static final Logger logger = Logger.getLogger(SisterPrinter.class.getName());
+  
+  private SisterPrinter(Builder builder) 
+  { 
+    super(builder);
+    Formatter plainText = new SimpleFormatter();
+    Handler handler = null;
+    try{
+      handler = new FileHandler("SISTER_PRINTER.txt");
+    }
+      catch(IOException e){
+        throw new NullPointerException("Couldn't create fileHandler");
+    }
+    handler.setFormatter(plainText);
+    logger.addHandler(handler);
+  }
+  
+  //signify the arrival of a message
+  public void recv(StringMessage message, Connector connector)
+  {
+    verifyRecv(message, connector);
+    this.logger.info(getLogMessage(message));
+  }
+  
+  //signify the arrival of a message
+  public void recv(BinaryMessage message, Connector connector)
+  {
+    verifyRecv(message, connector);
+    this.logger.info(getLogMessage(message));
+  }
+  
+  //compute the log message for StringMessages
+  public String getLogMessage(StringMessage message)
+  {
+    return "Sister Printer has printed the string: " + message.getString() + " " + getSerialNumber().get().toString();
+  }
+  
+  //compute the log message for BinaryMessages
+  public String getLogMessage(BinaryMessage message)
+  {
+    //message depends if this device has a product code 
+    if (getProductCode().isPresent()) 
+      return "Sister printer has printed the binary message: " + (message.getValue().intValue() + getProductCode().get());
+    else 
+      return "Sister printer has printed the binary message: " + message.getValue().intValue();
+  }
+   
+  public static class Builder extends AbstractPrinter.Builder<Builder>
+  {
+    public Builder(Integer version) { super(version); }
+    
+    public SisterPrinter build()
+    {
+      validate();
+      return new SisterPrinter(getThis());
+    }
+    
+    public Builder getThis() { return this; }
+  }
+}

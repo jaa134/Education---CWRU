@@ -1,0 +1,210 @@
+import java.util.*;
+
+/**
+ * A class that will represent the number sequences in the form of arrays.
+ * @author Jacob Alspaw
+ */
+public class NumArrayList implements NumList {
+  
+  /**
+   * The double-array for the sequence.
+   */
+  public double[] numbers;
+  
+  /**
+   * The size of the sequence.
+   */
+  public int sequenceSize;
+  
+  /**
+   * The constructor method that will initialize the sequence and the size of the array.
+   */
+  public NumArrayList() {
+    //new area with no items
+    numbers = new double[1];
+    //size of sequence is intially zero
+    sequenceSize = 0;
+  }
+  
+  /**
+   * A necessary method that will return an iterator to transverse an array list.
+   * @return Iterator<Double> The requested iterator.
+   */
+  public Iterator<Double> iterator() {
+    return new Iterator<Double>(){
+      
+      /**
+       * The location for the iterator.
+       */
+      private int spot = 0;
+      
+      /**
+       * A method to test if the array has a value in the next consecutive location;
+       * @return boolean Does the sequence have a next value?
+       */
+      public boolean hasNext() {
+        return (spot < sequenceSize);
+      }
+      
+      /**
+       * A method to return the value of the current location and then increment the current position.
+       * @return Double The value of the current location.
+       */
+      public Double next() {
+        double save = numbers[spot];
+        spot++;
+        return save;
+      }
+      
+      /** 
+       * This method will not and should not be used but still must be created.
+       */
+      public void remove() {
+        throw new UnsupportedOperationException();
+      }
+    };
+  }
+  
+  /**
+   * This method will return the size of the array. The worst case running time is one operation.
+   * In terms of big O, it's O(1).
+   * @return int The size of the array.
+   */
+  public int size() {
+    return sequenceSize;
+  }
+  
+  /**
+   * This method will insert an item with a certain value in the designated location. The worst case running
+   * time is two cycles through the sequence, but this rarely happens. In terms of big O, it's O(n).
+   * @param i The location of the added item.
+   * @param value The double value of the added item.
+   */
+  public void insert(int i, double value) { 
+    //if the user enters a number less than one, produce an error.
+    if(i < 0) {
+      throw new IllegalArgumentException("Numbers less than 0 are not permitted!");
+    }
+    
+    //if the array is full
+    if(sequenceSize >= numbers.length) {
+      //creates a temporary sequence of precise length to copy values into
+      double[] temp = new double[sequenceSize];
+      //loop to copy values beside imput into array
+      for(int j = 0; j < temp.length; j++) {
+        temp[j] = numbers[j]; 
+      }
+      //changing the size of the field array
+      this.numbers = new double[sequenceSize * 2];
+      //if i is somewhere in the sequence
+      if(i < sequenceSize) {
+        //loop to copy values before i back into our field array
+        for(int j = 0; j < i; j++) {
+          numbers[j] = temp[j];
+        }
+        //setting the ith position to the value
+        numbers[i] = value;
+        //loop to copy values after i back into our field array
+        for(int j = i + 1; j < temp.length + 1; j++) {
+          numbers[j] = temp[j - 1];
+        }
+      }
+      //if i is at the end of the sequence or outside of it
+      if(i >= sequenceSize) {
+        //copy all original values back into field array
+        for(int j = 0; j < temp.length; j++) {
+          numbers[j] = temp[j];
+        }
+        //set the end of the sequence to be the value
+        numbers[sequenceSize] = value;
+      }
+    }
+    //if the array has room to add in elements
+    else {
+      //scoot all the elements after i down the array one position
+      for(int j = sequenceSize; j > i; j--) {
+        //moving numbers to the right
+        numbers[j] = numbers[j - 1];
+      }
+      //place in the value
+      if(i < sequenceSize) {
+        numbers[i] = value;
+      }
+      //place in the value
+      if(i >= sequenceSize) {
+        numbers[sequenceSize] = value;
+      }
+    }
+    //increase the sequence size
+    sequenceSize = sequenceSize + 1;
+  }
+  
+  /**
+   * This method will remove an item from the designated location. The worst case running time is two cycles
+   * through the sequence, but this rarely happens. In terms of big O, it's O(n).
+   * @param i The location of the removed item.
+   */
+  public void remove(int i) {    
+    //if the user enters a number less than one, produce an error.
+    if(i < 0) {
+      throw new IllegalArgumentException("Numbers less than 0 are not permitted!");
+    }
+    //if the position of the removed item is somewhere in the sequence
+    if(i < sequenceSize) {
+      //the size of the sequence will decrease
+      sequenceSize = sequenceSize - 1;
+      //if the sequenceSize is less than half the total length we will shrink the array
+      if(sequenceSize < (int)(0.5 * numbers.length) && sequenceSize > 5) {
+        //new area to temporarily hold values
+        double[] temp = new double[sequenceSize];
+        //loop to copy values, excluding removed value
+        for(int j = 0; j <= sequenceSize; j++) {
+          //copy numbers before removed position
+          if(j < i) {
+            temp[j] = numbers[j];
+          }
+          //copy numbers after removed position
+          if(j > i) {
+            temp[j - 1] = numbers[j];
+          }
+        }
+        //changing size of original array
+        this.numbers = new double[sequenceSize];
+        //loop to copy values from temporary array back into original array
+        for(int k = 0; k < sequenceSize; k++) {
+          numbers[k] = temp[k];
+        }
+      }
+      //if the sequenceSize isnt less than half total length, we will just remove the element
+      else {
+        //loop to move values
+        for(int j = 0; j < sequenceSize; j++) {
+          //push sequence numbers up one position
+          if(j >= i) {
+            numbers[j] = numbers[j + 1];
+          }
+        }
+        //covers some extraneous conditions
+        numbers[sequenceSize] = 0.0;
+      }
+    }
+    //if the removed position isn't part of the sequence, do nothing
+    else {
+    }
+  }
+  
+  /**
+   * This method will return the value of an item for a designated location. The worst case running time is
+   * one operation. In terms of big O, it's O(1).
+   * @param i The location of the designated item.
+   * @reutrn double The value of the item.
+   */
+  public double lookup(int i) {
+    //produces an error when the user has gone outside the array size
+    if(i < 0 || i >= sequenceSize) {
+      throw new IllegalArgumentException("Postion outside sequence size!");
+    }
+    return numbers[i];
+  }
+}
+    

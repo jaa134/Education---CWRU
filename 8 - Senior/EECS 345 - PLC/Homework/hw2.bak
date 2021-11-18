@@ -1,0 +1,12 @@
+#lang racket
+(define choose
+  (lambda (n k)
+    (if (or (eq? n k) (zero? k))
+        1
+        (* (/ n k) (choose (- n 1) (- k 1))))))
+
+(define choose-cps
+  (lambda (n k)
+    (if (or (eq? n k) (zero? k))
+        1
+        (* (/ n k) (choose (- n 1) (- k 1))))))

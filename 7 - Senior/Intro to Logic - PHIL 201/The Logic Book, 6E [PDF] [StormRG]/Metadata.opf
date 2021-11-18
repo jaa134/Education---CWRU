@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uuid_id">
+    <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+        <dc:identifier opf:scheme="calibre" id="calibre_id">3002</dc:identifier>
+        <dc:identifier opf:scheme="uuid" id="uuid_id">9ab4da1a-2f22-480c-a2b8-4cfd000f3c6d</dc:identifier>
+        <dc:title>Merrie Bergmann, James Moor, Jack Nelson</dc:title>
+        <dc:creator opf:file-as="The Logic Book, 6th ed." opf:role="aut">The Logic Book, 6th ed.</dc:creator>
+        <dc:contributor opf:file-as="calibre" opf:role="bkp">calibre (0.9.42) [http://calibre-ebook.com]</dc:contributor>
+        <dc:date>0101-01-01T00:00:00+00:00</dc:date>
+        <dc:language>eng</dc:language>
+        <meta content="{&quot;The Logic Book, 6th ed.&quot;: &quot;&quot;}" name="calibre:author_link_map"/>
+        <meta content="2014-05-24T11:12:55+00:00" name="calibre:timestamp"/>
+        <meta content="Merrie Bergmann, James Moor, Jack Nelson" name="calibre:title_sort"/>
+    </metadata>
+    <guide>
+        <reference href="Merrie Bergmann, James Moor, Jack Nelson - The Logic Book, 6th ed_.jpg" title="Cover" type="cover"/>
+    </guide>
+</package>

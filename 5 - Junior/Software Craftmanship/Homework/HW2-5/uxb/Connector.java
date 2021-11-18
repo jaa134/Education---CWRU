@@ -1,0 +1,85 @@
+package uxb;
+
+import java.util.Optional;
+import java.util.Objects;
+
+//a physical plug that enables the user to insert a cable for connecting a device to a computer or a hub
+public final class Connector
+{
+  //type of connector definition
+  public enum Type { COMPUTER, PERIPHERAL };
+  
+  //position in the connectors collection
+  private final int index;
+  //type of this connector
+  private final Type type;
+  //the device using this connector
+  private final Device device;
+  //the connector, if any, to which this connector is plugged
+  private Optional<Connector> peer;
+
+  public Connector(Device device, int index, Type type)
+  {
+    this.device = device;
+    this.index = index;
+    this.type = type;
+    this.peer = Optional.empty();
+  }
+  
+  public int getIndex() { return this.index; }
+  
+  public Type getType() { return this.type; }
+  
+  public Device getDevice() { return this.device; }
+  
+  public Optional<Connector> getPeer() { return this.peer; }
+  
+  //sets the peer of this connector
+  public void setPeer(Connector peer) throws ConnectionException
+  {
+    //check for null peer
+    Objects.requireNonNull(peer);
+    //verify that there are no connection errors
+    verifyAgainstConnectionExceptions(peer);
+    //set the peers
+    this.peer = Optional.of(peer);
+    if (!peer.getPeer().isPresent())
+      peer.setPeer(this); 
+  }
+
+  //verify that the peer doesn't have a connection exception
+  private void verifyAgainstConnectionExceptions(Connector peer) throws ConnectionException
+  {
+    //check for existing peer
+    if (this.peer.isPresent())
+      throw new ConnectionException(this, ConnectionException.ErrorCode.CONNECTOR_BUSY);
+    //check if connectors have same type (mis-matched)
+    else if(connectorsHaveSameType(this, peer)) 
+      throw new ConnectionException(this, ConnectionException.ErrorCode.CONNECTOR_MISMATCH);
+    //check if this connector will loop indirectly back to its device
+    else if(peer.isReachable(getDevice()))
+      throw new ConnectionException(this, ConnectionException.ErrorCode.CONNECTION_CYCLE);
+  }
+  
+  //check for a mismatch between connectors
+  private boolean connectorsHaveSameType(Connector c1, Connector c2)
+  {
+    return c1.getType() == c2.getType(); 
+  }
+  
+  //makes sure that the message reaches the connector's device
+  public void recv(Message message)
+  {
+    message.reach(getDevice(), this);
+  }
+  
+  public boolean isReachable(Device device)
+  {
+    return device.isReachable(this.device);
+  }
+  
+  public boolean equals(Connector c)
+  {
+    return c != null && c.index == this.index && c.type == this.type && c.device.equals(this.device);
+  }
+}

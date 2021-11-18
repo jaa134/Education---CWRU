@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="10dp"
+        android:text="Main Activity"
+        android:textStyle="bold"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="60dp"
+        android:text=""
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/btn_a1"
+        android:onClick="OnA1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Broadcast Activity"
+        android:layout_marginBottom="120dp"
+        android:layout_marginLeft="0dp"
+        android:layout_gravity="bottom" />
+
+    <Button
+        android:id="@+id/btn_a2"
+        android:onClick="OnA2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Service Activity"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="0dp"
+        android:layout_gravity="bottom" />
+
+    <Button
+        android:id="@+id/btn_a3"
+        android:onClick="OnA3"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Content Provider Activity"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_gravity="bottom" />
+
+</android.support.design.widget.CoordinatorLayout>

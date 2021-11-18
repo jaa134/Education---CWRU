@@ -1,0 +1,10 @@
+#lang racket
+
+;; create the fuction duplicate that takes an atom and a number and creates a list
+;; with that many copies of the atom in it
+;; (duplicate 'x 5) => (x x x x)
+(define duplicate
+  (lambda (a n)
+    (if (zero? n)
+        '()
+        (cons a (duplicate a (- n 1))))))

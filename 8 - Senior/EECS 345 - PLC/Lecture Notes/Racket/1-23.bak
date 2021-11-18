@@ -1,0 +1,16 @@
+#lang racket
+
+(define member*?
+  (lambda (a lis)
+    (cond
+      [(null? lis) #f]
+      [(pair? (car lis)) (or (member*? a (car lis)) (member*? a (cdr lis)))]
+      [(eq? a (car lis)) #t]
+      [else (member*? a (cdr lis))])))
+
+;; (replaceall* 'x 'y '(a x ((b x c) d x e))) => '(a y ((byc) d y e))
+
+;; (removeleftmost* 'x '(((a v) (x c))) x d) =? '(((a v) (c))) x d)
+
+;; (emptylists '(a (b c) ((d e) (f)))) => '(() (() ()))
+

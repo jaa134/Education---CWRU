@@ -1,0 +1,20 @@
+#lang racket
+
+; write factorial in tail recursion with an accumulator
+(define factorial_acc
+  (lambda (n a)
+    (if (zero? n)
+        a
+        (factoria_acc (- n 1) (* a n)))))
+
+(define factorial
+  (lambda (n)
+    (factorial_acc n 1)))
+  
+; write append in tail recursion with an accumulator
+(define append_acc
+  (lamnda (lis e a)
+    (cond
+      [(null? lis) e]
+      [(null? (cdr lis)) a]
+      [else 

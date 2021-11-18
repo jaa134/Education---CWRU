@@ -1,0 +1,15 @@
+#lang racket
+; multiple a list of numvers
+(define multiply
+  (lambda (lis)
+    (if (null? lis)
+        1
+        (* (car lis) (multiply (cdr lis))))))
+
+
+(define multiply
+  (lambda (lis acc)
+    (if (null? lis)
+        acc
+        (* (car lis) (multiply (cdr lis))))))
+

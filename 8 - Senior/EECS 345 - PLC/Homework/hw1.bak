@@ -1,0 +1,31 @@
+#lang racket
+
+;;1
+;;choose takes two integers, say n and k, and returns C(n,k), the combinatorial "choose" function from discrete mathematics. Recall that C(n,k) = n/k * C(n-1,k-1), and C(n,0) = C(n,n) = 1.
+
+;;2
+;;
+
+;;3
+;;
+
+;;4
+;;
+
+;;;5
+;;
+
+;;6
+;;
+
+;;7
+;;
+
+;;8
+;;
+
+;;9
+;;
+
+;;10
+;;

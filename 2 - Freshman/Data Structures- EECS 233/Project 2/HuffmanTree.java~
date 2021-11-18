@@ -1,0 +1,77 @@
+import java.util.*;
+
+/**
+ * A class to represent a Huffman Encoding Tree.
+ */
+public class HuffmanTree {
+  
+  /**
+   * The root of the tree.
+   */
+  private Node root;
+  
+  /**
+   * An array to represent the Huffman Codes.
+   */
+  public static String[] codes = new String[127];
+  
+  /**
+   * A string builder to represent the huffman code of a single character.
+   */
+  private static StringBuilder huffRep;
+  
+  /**
+   * A int to keep track of the number of leaf nodes.
+   */
+  private static int leafCount = 0;
+  
+  
+  
+  
+  
+  
+  
+  /**
+   * This constructor will initialize a tree.
+   */
+  public HuffmanTree(HuffLinkedList list) {
+    //HuffmanTree.makeTree();
+  }
+  
+  
+  
+  
+  
+  
+  
+  /**
+   * This method prints out the huffman tree in preorder transversal.
+   */
+  public void determineCodes() {
+    if (root != null)
+      preorderTraversal(root);
+  }
+  
+  /**
+   * This method traverses the huffman tree.
+   * @param node The node used for recursive traversal.
+   */
+  private static void preorderTraversal(Node node) {
+    //print out the char
+    System.out.print(node.getChar() + " ");
+    //if the node has a left node
+    if (node.getLeftNode() != null) {
+      //add a zero to the string
+      huffRep.append("0");
+      //add traverse the left side
+      preorderTraversal(node.getLeftNode());
+    }
+    //if the node has a right node
+    if (node.getRightNode() != null) {
+      //add a 1 to the string
+      huffRep.append("1");
+      //traverse the right side
+      preorderTraversal(node.getRightNode());
+    }
+  }
+}

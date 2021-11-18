@@ -1,0 +1,7 @@
+package uxb;
+
+//a type of device
+public class Printer extends AbstractPeripheral<Printer.Builder>
+{
+  
+}

@@ -1,0 +1,3 @@
+#lang racket
+;; to see the syntax of an argument
+;; (syntax (+ 3 5))

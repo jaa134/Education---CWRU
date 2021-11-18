@@ -1,0 +1,16 @@
+(1)
+second order
+
+(2)
+a=1
+b=2
+c=1
+
+(3)
+first order
+
+(4)
+2
+
+(5)
+polyval

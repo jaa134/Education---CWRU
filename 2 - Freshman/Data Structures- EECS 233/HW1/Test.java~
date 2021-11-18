@@ -1,0 +1,6 @@
+public class Test {
+  int occurrences (String s, char c) {
+    if (s.length() == 0) return 0;
+    return occurrences(String.valueOf(s.charAt(0)), c) + occurrences(s.subString(1), c);
+  }
+}

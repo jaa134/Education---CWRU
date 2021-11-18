@@ -1,0 +1,37 @@
+public class Function {
+  
+  private String name;
+  private Statement functionBody;
+  private Variable[] variable;
+  
+  public Function(String name, Statement functionBody, Variable... variable) {
+    this.name = name;
+    this.functionBody = functionBody;
+    this.variable = variable;
+  }
+  
+  public Variable[] getVariable() {
+    return variable;
+  }
+  
+  public String getName() {
+    return name;
+  }
+  
+  public Statement getFunctionBody() {
+    return functionBody;
+  }
+  
+  public String toString() {
+    StringBuilder newString = new StringBuilder();
+    newString.append("function " + name + "(" );
+    for(int i = 0; i < variable.length; i++) {
+      newString.append(variable[i].toString());
+      if(i != variable.length -1) {
+        newString.append(", ");
+      }
+    }
+    newString.append((")" + "\n" + functionBody.toStringTabbed(1)));
+    return newString.toString();
+  }
+} 

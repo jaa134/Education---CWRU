@@ -1,0 +1,300 @@
+import java.util.*;
+
+/*
+ * A class that will represent a phone or email contact.
+ * @author Jacoob Alspaw
+ */
+public class Contact implements DatabaseType {
+  
+  /*
+   * The contact name for a person.
+   */
+  private String name;
+  
+  /*
+   * The contact phone number for a person.
+   */
+  private String phoneNumber;
+  
+  /*
+   * The contact e-mail for a person.
+   */
+  private String email;
+  
+  /*
+   * A constructor method that will set the values of the fields.
+   * @param name Is the name of the contact.
+   * @param phoneNumber Is the phone number of the contact.
+   * @param email Is the email of the contact.
+   */
+  public Contact(String name, String phoneNumber, String email) {
+    setName(name);
+    setPhoneNumber(phoneNumber);
+    setEmail(email);
+  }
+  
+  /*
+   * A getter method for name.
+   * @return name Is the name of the contact.
+   */
+  public String getName() {
+    return name;
+  }
+  
+  /*
+   * A getter method for phoneNumber.
+   * @return phoneNumber Is the phone number for the contact.
+   */
+  public String getPhoneNumber() {
+    return phoneNumber;
+  }
+  
+  /*
+   * A getter method for email.
+   * @return email Is the email of the contact.
+   */
+  public String getEmail() {
+    return email;
+  } 
+  
+  /*
+   * A helper method used with getComparatorByTrait() method.
+   * @return this contact
+   */
+  private Contact getContact(){
+    return this;
+  }
+  
+  /*
+   * A setter method for name.
+   * @param name Is the name of the contact.
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
+  
+  /*
+   * A setter method for phoneNumber.
+   * @param phoneNumber Is the phone number of the contact.
+   */
+  public void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
+  
+  /*
+   * A setter method for email.
+   * @param email Is the email for the contact.
+   */
+  public void setEmail(String email) {
+    this.email = email;
+  }
+  
+  /*
+   * A method that will override the toString methof inherrited from object. This 
+   * will convert non-strings to strings.
+   * @returns String Is a string representation for the contact.
+   */
+  @Override
+  public String toString() {
+    return (getName() + "   :   " + getPhoneNumber() + "\t" + getEmail());
+  }
+  
+  /*
+   * A method that will see if to contacts are the same.
+   * @param c Is the comparator for the method.
+   * @return equal Represents the quality of the comparison.
+   */
+  @Override
+  public boolean equals(Object o) {
+    boolean nameEqual = false; //represents if the contacts are the same
+    boolean phoneEqual = false; //represents if the contacts are the same
+    boolean emailEqual = false; //represents if the contacts are the same
+    
+    Contact c = (Contact)o;
+    
+    if(this.getName() != null && c.getName() != null) {
+      if(this.getName().equals(c.getName())) {
+        nameEqual = true;
+      }
+    }
+    else if(this.getName() == null && c.getName() == null) {
+      nameEqual = true;
+    }
+    
+    if(this.getPhoneNumber() != null && c.getPhoneNumber() != null) {
+      if(this.getPhoneNumber().equals(c.getPhoneNumber())) {
+        phoneEqual = true;
+      }
+    }
+    else if(this.getPhoneNumber() == null && c.getPhoneNumber() == null) {
+      phoneEqual = true;
+    }
+    
+    if(this.getEmail() != null && c.getEmail() != null) {
+      if(this.getEmail().equals(c.getEmail())) {
+        emailEqual = true;
+      }
+    }
+    else if(this.getEmail() == null && c.getEmail() == null) {
+      emailEqual = true;
+    }
+    return (nameEqual && phoneEqual && emailEqual);
+  }
+  
+  /**
+   * A method that will return a comparator that compares two contacts based
+   * on the input trait and will overrides the abstract method in DatabaseType.
+   * @param trait Is the trait with which contacts are compared.
+   */
+  @Override
+  public Comparator<DatabaseType> getComparatorByTrait(String trait){
+    if(trait.equals("name")){
+      return new Comparator<DatabaseType>(){
+        /**
+         * This method will compare two name. The method will return a positive number if the first name is later
+         * alphabetically or longer, will return zero if both names are identical, or will return a negative number 
+         * otherwise.
+         * @param n1 Is the first name.
+         * @param n2 Is the second name.
+         * @return comparison integer
+         */
+        @Override
+        public int compare(DatabaseType n1, DatabaseType n2){
+          String s1 = n1.toString();      //string representation for name 1
+          String s2 = n2.toString();      //string representation for name 2
+          StringBuilder sb1 = new StringBuilder();  //stringbuilder representation for name 1
+          StringBuilder sb2 = new StringBuilder();  //stringbuilder representation for name 2
+          //Make a string representation of both name based on the toString() method
+          for(int i = 0; s1.charAt(i) != ':'; i++){
+            sb1.append(s1.charAt(i));
+          }
+          for(int i = 0; s2.charAt(i) != ':'; i++){
+            sb2.append(s2.charAt(i));
+          }
+          s1 = sb1.toString();
+          s2 = sb2.toString();
+          //Compare the names
+          for(int i = 0; i < s1.length() && i < s2.length(); i++){
+            if(s1.charAt(i) != s2.charAt(i))
+              return s1.charAt(i) - s2.charAt(i);
+          }
+          return s1.length() - s2.length();
+        }
+        @Override
+        public boolean equals(Object o){
+          if(compare(getContact(),(DatabaseType)o) == 0)
+            return true;
+          else
+            return false;
+        }
+      };
+    }
+    else if(trait.equals("phone")){
+      return new Comparator<DatabaseType>(){
+        /**
+         * This method will compare two phone numbers. It will return a positive number if the first phone number is
+         * smaller than the second, will return zero if the two strings are identical return a negative number 
+         * otherwise.
+         * @param p1 Is the first phone number.
+         * @param p2 Is the second phone number.
+         * @return comparison integer
+         */
+        @Override
+        public int compare(DatabaseType p1, DatabaseType p2){
+          String s1 = p1.toString(); //string representation for the phone number
+          String s2 = p2.toString(); //string representation for the phone number
+          StringBuilder sb1 = new StringBuilder(); //stringbuilder representation for the phone number
+          StringBuilder sb2 = new StringBuilder(); //stringbuilder representation for the phone number
+          //Make a string representation of both name based on the toString() method
+          int startIndex1 = -1; //where it will start
+          int startIndex2 = -1; //where it will start
+          for(int i = 0; s1.charAt(i) != ':'; i++){
+            if(s1.charAt(i+1) == ' ')
+              startIndex1 = i + 2;
+          }
+          for(int i = 0; s2.charAt(i) != ':'; i++){
+            if(s2.charAt(i+1) == ' ')
+              startIndex2 = i + 2;
+          }
+          for(int i = startIndex1; s1.charAt(i) != '\t'; i++){
+            sb1.append(s1.charAt(i));
+          }
+          for(int i = startIndex2; s2.charAt(i) != '\t'; i++){
+            sb2.append(s2.charAt(i));
+          }
+          s1 = sb1.toString();
+          s2 = sb2.toString();
+          //Compare the phone numbers
+          for(int i = 0; i < s1.length() && i < s2.length(); i++){
+            if(s1.charAt(i) != s2.charAt(i))
+              return s1.charAt(i) - s2.charAt(i);
+          }
+          return s1.length() - s2.length();
+        }
+        @Override
+        public boolean equals(Object o){
+          if(compare(getContact(),(DatabaseType)o) == 0)
+            return true;
+          else
+            return false;
+        }
+      };
+    }
+    else if(trait.equals("email")){
+      return new Comparator<DatabaseType>(){
+        /**
+         * This class will compares two names, phone numbers or e-mail addresses. It will return a positive number
+         * if the first argument is later alphabetically or longer, will return zero if the two strings are identical,
+         * or will return a negative number otherwise.
+         * @param e1 Is the first e-mail address.
+         * @param e2 Is the second e-mail address.
+         * @return comparison integer
+         */
+        @Override
+        public int compare(DatabaseType e1, DatabaseType e2){
+          String s1 = e1.toString();   //string representation for email
+          String s2 = e2.toString();   //string representation for email
+          StringBuilder sb1 = new StringBuilder(); //stringbuilder representation for email
+          StringBuilder sb2 = new StringBuilder(); //stringbuilder representation for email
+          int startIndex1 = -1; //where it will start
+          int startIndex2 = -1; //where it will start
+          //Make a string representation of the e-mail addresses based on toString()
+          for(int i = 1; s1.charAt(i-1) != '\t'; i++){
+            if(s1.charAt(i) == '\t')
+              startIndex1 = i;
+          }
+          for(int i = 1; s2.charAt(i-1) != '\t'; i++){
+            if(s2.charAt(i) == '\t')
+              startIndex2 = i;
+          }
+          for(int i = startIndex1; i < s1.length(); i++){
+            sb1.append(s1.charAt(i));
+          }
+          for(int i = startIndex2; i < s2.length(); i++){
+            sb2.append(s2.charAt(i));
+          }
+          s1 = sb1.toString();
+          s2 = sb2.toString();
+          //Compare the e-mail addresses
+          for(int i = 0; i < s1.length() && i < s2.length(); i++){
+            if(s1.charAt(i) != s2.charAt(i))
+              return s1.charAt(i) - s2.charAt(i);
+          }
+          return s1.length() - s2.length();
+        }
+        @Override
+        public boolean equals(Object o){
+          if(compare(getContact(),(DatabaseType)o) == 0)
+            return true;
+          else
+            return false;
+        }
+      };
+    }
+    else
+      return null;
+  }
+}
+    
+  
+  

@@ -1,0 +1,12 @@
+#lang racket
+; removeall*
+(define removeall*-cps
+  (lambda (x lis return)
+    (cond
+      [(null? lis) (return '())]
+      [(list? (car lis)) (removeall*-cps x (car-lis) (lambda (v1) (removeall*-cps x (cdr lis) (lambda (v2) (return (cons v1 v2))))))]
+      [(eq? (car lis) x) (removeall*-cps x (cdr lis) return)]
+      [else (removeall*-cps x (cdr lis) (lambda (v) (return (cons (car lis) v))))])))
+                                     
+; flatten
+; (split '(a b c d e f)) => ((a c e g) (b d f))

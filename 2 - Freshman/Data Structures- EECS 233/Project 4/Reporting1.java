@@ -1,0 +1,368 @@
+import java.io.*;
+import java.util.*;
+
+/**
+ * The first of two classes that will help report results of our research.
+ * This class will find information concerning the running of the methods.
+ * @author Jacob Alspaw
+ */
+public class Reporting1 {
+  
+  /**
+   * A method that will allow for mass testing of the sorting algorithms.
+   * @param limit The number of test trials to be conducted.
+   * @param method The sorting algorithm that can be used.
+   * @param length The length of each array.
+   * @param type The sort of array used.
+   * @return String A message containing information about the test.
+   */
+  private static String massTest(int limit, String method, int length, String type) {
+    //checking for allowed input array types
+    if(!type.equals("random") && !type.equals("sorted") && !type.equals("reversed")) {
+      throw new IllegalArgumentException("The array type isn't supported!\nTry using random, sorted, or reversed.");
+    }
+    //a boolean representing truth in order
+    boolean ordered = true;
+    //an arrray for duration of individual trial runs
+    int[] times = new int[limit];
+    //if user want to use heap sort
+    if(method.equals("heap")) {
+      //test an array input times
+      for(int i = 0; i < limit; i++) {
+        //make the corresponding array type
+        int[] array;
+        if(type.equals("random"))
+          array = randomArray(length);
+        if(type.equals("sorted")) 
+          array = sortedArray(length);
+        else
+          array = reverseSorted(length);
+        //apply the sorting algorithm
+        times[i] = (int)Sorting.heapSort(array);
+        //test if its in order
+        if(isOrdered(array) == false) {
+          ordered = false;
+        }
+      }
+    }
+    //if the user wants to use quick sort
+    else if(method.equals("quick")) {
+      //test a random array input times
+      for(int i = 0; i < limit; i++) {
+        //make the corresponding array type
+        int[] array;
+        if(type.equals("random"))
+          array = randomArray(length);
+        if(type.equals("sorted")) 
+          array = sortedArray(length);
+        else
+          array = reverseSorted(length);
+        //apply the sorting algorithm
+        times[i] = (int)Sorting.quickSort(array);
+        //test if its in order
+        if(isOrdered(array) == false) {
+          ordered = false;
+        }
+      }
+    }
+    //if the user wants to use merge sort
+    else if(method.equals("merge")) {
+      //test a random array input times
+      for(int i = 0; i < limit; i++) {
+        //make the corresponding array type
+        int[] array;
+        if(type.equals("random"))
+          array = randomArray(length);
+        if(type.equals("sorted")) 
+          array = sortedArray(length);
+        else
+          array = reverseSorted(length);
+        //apply the sorting algorithm
+        times[i] = (int)Sorting.mergeSort(array);
+        //test if its in order
+        if(isOrdered(array) == false) {
+          ordered = false;
+        }
+      }
+    }
+    //if a unknown sorting algorithm is input, then throw an error
+    else {
+      throw new IllegalArgumentException("Not a defined sorting method.\nTry using heap, quick, or merge.");
+    }
+    //creating a value for total time
+    return getInfo(limit, method, length, type, times, ordered);
+  }  
+  
+  /**
+   * A method that will translate run-time findings to English Sentences.
+   * @param limit The number of test trials to be conducted.
+   * @param method The sorting algorithm that can be used.
+   * @param length The length of each array.
+   * @param type The sort of array used.
+   * @param times The array storing individual test durations.
+   * @param ordered The truth if all the arrays were sorted.
+   * @return String The information about the test trial.
+   */
+  private static String getInfo(int limit, String method, int length, String type, int[] times, boolean ordered) {
+    //if the array isnt in perfect order
+    if(ordered == false) {
+      //return a message of a failed test
+      return "One or more arrays were out of order!";
+    }
+    else {
+      //creating a value for average time
+      long averageTime = (long)meanVal(times);
+      //creating a value for the median time
+      long median = (long)median(times);
+      //creating a value for the total time
+      long totalTime = averageTime * (long)limit;
+      //creating a value for the varience in the run
+      long varience = (long)varienceVal(times, averageTime);
+      //the information
+      return("All arrays were in order for this test run!" + System.getProperty("line.separator") +
+             "  The length of the used " + type + " arrays are " + length + "." + System.getProperty("line.separator") +
+             "  The average time to " + method + " sort was " + averageTime + "ns for " + limit + " tests." + System.getProperty("line.separator") +
+             "  The median time to " + method + " sort was " + median + "ns for " + limit + " tests." + System.getProperty("line.separator") +
+             "  The total time used was " + totalTime/(double)(1000000000) + " seconds for " + limit + " tests." + System.getProperty("line.separator") +
+             "  The varience in this trial set was " + varience + "ns, nearly " + roundDouble(varience/(double)(1000000000), 3) + " seconds squared.");
+    }
+  } 
+  
+  /**
+   * A method that goes through every combination of trial and makes a 
+   * report concerning their run-time statistics.
+   */
+  private static void makeReport() throws IOException {
+    //creating the file to dump the trial information into
+    PrintWriter writer = new PrintWriter("Trial Information.txt", "UTF-8");
+    //general overview of the file and author's name
+    writer.println("Jacob Alspaw");
+    writer.println("This file contains information concerning the sorting algorithms implemented in this project.");
+    writer.println();
+    //results of combinations of heap sort
+    writer.println("/=================\\");
+    writer.println("|    HEAP SORT    |");
+    writer.println("\\=================/");
+    writer.println("-->RANDOMLY SORTED<--");
+    writer.println(massTest(10, "heap", 1000, "random"));
+    writer.println(massTest(10, "heap", 10000, "random"));
+    writer.println(massTest(10, "heap", 100000, "random"));
+    writer.println(massTest(10, "heap", 1000000, "random") + System.getProperty("line.separator")); //new line for aesthetics
+    writer.println("-->PERFECTLY SORTED<--");
+    writer.println(massTest(10, "heap", 1000, "sorted"));
+    writer.println(massTest(10, "heap", 10000, "sorted"));
+    writer.println(massTest(10, "heap", 100000, "sorted"));
+    writer.println(massTest(10, "heap", 1000000, "sorted") + System.getProperty("line.separator")); //new line for aesthetics
+    writer.println("-->REVERSE SORTED<--");
+    writer.println(massTest(10, "heap", 1000, "reversed"));
+    writer.println(massTest(10, "heap", 10000, "reversed"));
+    writer.println(massTest(10, "heap", 100000, "reversed"));
+    writer.println(massTest(10, "heap", 1000000, "reversed") + System.getProperty("line.separator")); //new line for aesthetics
+    writer.println();
+    //results of combinations of quick sort
+    writer.println("/==================\\");
+    writer.println("|    QUICK SORT    |");
+    writer.println("\\==================/");
+    writer.println("-->RANDOMLY SORTED<--");
+    writer.println(massTest(10, "quick", 1000, "random"));
+    writer.println(massTest(10, "quick", 10000, "random"));
+    writer.println(massTest(10, "quick", 100000, "random"));
+    writer.println(massTest(10, "quick", 1000000, "random") + System.getProperty("line.separator")); //new line for aesthetics
+    writer.println("-->PERFECTLY SORTED<--");
+    writer.println(massTest(10, "quick", 1000, "sorted"));
+    writer.println(massTest(10, "quick", 10000, "sorted"));
+    writer.println(massTest(10, "quick", 100000, "sorted"));
+    writer.println(massTest(10, "quick", 1000000, "sorted") + System.getProperty("line.separator")); //new line for aesthetics
+    writer.println("-->REVERSE SORTED<--");
+    writer.println(massTest(10, "quick", 1000, "reversed"));
+    writer.println(massTest(10, "quick", 10000, "reversed"));
+    writer.println(massTest(10, "quick", 100000, "reversed"));
+    writer.println(massTest(10, "quick", 1000000, "reversed") + System.getProperty("line.separator")); //new line for aesthetics
+    writer.println();
+    //results for combination of merge sort
+    writer.println("/==================\\");
+    writer.println("|    MERGE SORT    |");
+    writer.println("\\==================/");
+    writer.println("-->RANDOMLY SORTED<--");
+    writer.println(massTest(10, "merge", 1000, "random"));
+    writer.println(massTest(10, "merge", 10000, "random"));
+    writer.println(massTest(10, "merge", 100000, "random"));
+    writer.println(massTest(10, "merge", 1000000, "random") + System.getProperty("line.separator")); //new line for aesthetics
+    writer.println("-->PERFECTLY SORTED<--");
+    writer.println(massTest(10, "merge", 1000, "sorted"));
+    writer.println(massTest(10, "merge", 10000, "sorted"));
+    writer.println(massTest(10, "merge", 100000, "sorted"));
+    writer.println(massTest(10, "merge", 1000000, "sorted") + System.getProperty("line.separator")); //new line for aesthetics
+    writer.println("-->REVERSE SORTED<--");
+    writer.println(massTest(10, "merge", 1000, "reversed"));
+    writer.println(massTest(10, "merge", 10000, "reversed"));
+    writer.println(massTest(10, "merge", 100000, "reversed"));
+    writer.println(massTest(10, "merge", 1000000, "reversed") + System.getProperty("line.separator")); //new line for aesthetics
+    writer.close();
+  }
+  
+  /**
+   * A helper method that will iteratively go through an array and determine if it is sorted.
+   * @param array The array tested for correct order.
+   * @return boolean The truth value to its order.
+   */
+  private static boolean isOrdered(int[] array) {
+    //go through the entire array
+    for(int i = 0; i < array.length - 1; i++) {
+      //if the current value is greater than the next value
+      if(array[i] > array[i+1]) {
+        //array is falsely ordered
+        return false;
+      }
+    }
+    //if it reaches this point, array is correctly ordered
+    return true;
+  }  
+  
+  /**
+   * A helper method that will average the values of an array.
+   * @param array An array of durations of individual trial runs.
+   * @return double The average time of the execution of all trial runs.
+   */
+  private static double meanVal(int[] array) {
+    //keep a total of all values
+    double total = 0;
+    //add up all values
+    for(int i = 0; i < array.length; i++) {
+      total += array[i];
+    }
+    //return average
+    return total/array.length;
+  }
+  
+  /**
+   * A helper method that will calculate the variance in our test trial results.
+   * @param array An array of durations of individual trial runs.
+   * @return double The varience in the mass testing.
+   */
+  private static double varienceVal(int[] array, double mean) {
+    //arbitrary number for the equation of varience
+    double num = 0;
+    //summation of all spots in the array
+    for(int i = 0; i < array.length; i++) {
+      //summing the squared difference of the time of an individual test and the average case
+      num += Math.pow((array[i] - mean), 2);
+    }
+    //finishing the equation
+    return (1.0/(array.length - 1.0)) * num;
+  }
+  
+  /**
+   * A helper method to find the medium value of an array.
+   * @param array An array of integers representing sorting times.
+   * @return int The median value in the array.
+   */
+  public static int median(int[] array) {
+    //sort the array
+    Sorting.quickSort(array);
+    //return that middle value
+    return array[array.length/2];
+  }
+  
+  /**
+   * A helper method that will round a double to a arbitrary number of places.
+   * @param number The number to be rounded.
+   * @param places The places behind a decimal the number should be rounded to.
+   * @return double The rounded number.
+   */
+  private static double roundDouble(double number, int places) {
+    //places shouldnt be before decimal
+    if (places < 0) {
+      throw new IllegalArgumentException();
+    }
+    //finding a factor to move the decimal
+    long factor = (long) Math.pow(10, places);
+    //moving the decimal
+    number = number * factor;
+    //making the value an int
+    long bigNum = Math.round(number);
+    //returning the int to its rounded counterpart
+    return (double) bigNum / factor;
+  }
+  
+  /**
+   * A helper method that produces a random array.
+   * @param length The length of the array.
+   * @return array The randomized array.
+   */
+  public static int[] randomArray(int length) {
+    //checking to see if the size isnt too small
+    if(length <= 0) {
+      throw new IllegalArgumentException("Arrays must be of size greater than 0!");
+    }
+    //makig an empty array
+    int[] array = new int[length];
+    //loop to put values everywhere
+    for(int i = 0; i < array.length; i++) {
+      //setting a random seed
+      Random random = new Random((int)(Math.random() * 100000));
+      //put a random value in the location
+      array[i] = Math.abs(random.nextInt()/100000);
+    }
+    return array;
+  }
+  
+  /**
+   * A helper method that produces a sorted array.
+   * @param length The length of the array.
+   * @return array The sorted array.
+   */
+  private static int[] sortedArray(int length) {
+    //checking to see if the size isnt too small
+    if(length <= 0) {
+      throw new IllegalArgumentException("Arrays must be of size greater than 0!");
+    }
+    //make an empty array
+    int[] array = new int[length];
+    //go through each spot
+    for(int i = 0; i < array.length; i++) {
+      //put in an asceding count
+      array[i] = i;
+    }
+    return array;
+  }
+  
+  /**
+   * A helper method that produces a reverse sorted array.
+   * @param length The length of the array.
+   * @return array The reversed sorted array.
+   */
+  private static int[] reverseSorted(int length) {
+    //checking to see if the size isnt too small
+    if(length <= 0) {
+      throw new IllegalArgumentException("Arrays must be of size greater than 0!");
+    }
+    //make an empty array
+    int[] array = new int[length];
+    //go through each spot
+    for(int i = 0; i < array.length; i++) {
+      //put in a descending count
+      array[i] = array.length - i;
+    }
+    return array;
+  }
+  
+  /**
+   * The main method to run our program.
+   * @param args The arguments given for the method. There should be no arguments.
+   */
+  public static void main(String[] args) {
+    //if an incorrect amount of arguments are given
+    if(args.length > 0) {
+      throw new IllegalArgumentException("No arguments are allowed");
+    }
+    try {
+      //make the document
+      makeReport();
+    }
+    //catch any errors
+    catch (IOException e) {
+      System.out.println("In/Out Error!");
+    }
+  }
+}

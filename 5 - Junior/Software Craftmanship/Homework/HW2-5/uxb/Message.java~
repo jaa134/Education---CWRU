@@ -1,0 +1,10 @@
+package uxb;
+
+//an outline of a message definition. messages will be passed between devices
+public interface Message
+{
+//  //signifies that the message has reached the given device
+//  void reach(Device device, Connector connector);
+//  //makes sure that the message reaches the connector's device
+//  void recv(Message message);
+}
